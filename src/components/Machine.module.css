@@ -1,0 +1,31 @@
+.containerMaquina{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.fundoMaquina{
+    width: 30%;
+    height: 80%;
+    /* background-color: #50bfff; */
+    background-color: #000;
+    display: flex;
+    justify-content: space-around;
+}
+
+.leftSide{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rightSide{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

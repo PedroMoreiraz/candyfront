@@ -1,0 +1,70 @@
+.containerDinheiro{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dinheiroEntrada{
+    position: absolute;
+    width: 6vw;
+    height: 1%;
+    background-color: #d8d8d8;
+    left: 56%;
+    top: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.furoDinehiroEntrada{
+    width: 5vw;
+    height: 0.3vh;
+    background-color: #555555;
+}
+
+.dinheiroSaida{
+    position: absolute;
+    width: 6vw;
+    height: 1%;
+    background-color: #d8d8d8;
+    left: 56%;
+    top: 67%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.furoDinheiroSaida{
+    width: 5vw;
+    height: 0.3vh;
+    background-color: #555555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moeda{
+    position: absolute;
+    width: 0.3vw;
+    height: 2%;
+    background-color: #d8d8d8;
+    left: 55%;
+    top: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.furoMoeda{
+    width: 0.1vw;
+    height: 1vh;
+    background-color: #555555;
+}
+
+.troco{
+    width: 0.5;
+    height: 3%;
+    background-color: #2cdb49;
+}

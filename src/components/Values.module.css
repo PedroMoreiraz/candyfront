@@ -1,0 +1,39 @@
+.containerValues{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.opcoes{
+    position: absolute;
+    left: 53%;
+    top: 40%;
+    width: 9vw;
+    height: 20%;
+    margin: 30px 30px 0px 30px;
+    background-color: #ffffff;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+.options{
+    padding: 5px;
+    color: #000000;
+}
+
+.options p{
+    color: rgb(252, 26, 26);
+}
+
+.btn{
+    border-radius: 25px;
+    border: none;
+    background-color: rgb(47, 195, 253);
+    color: #000;
+    cursor: pointer;
+}
