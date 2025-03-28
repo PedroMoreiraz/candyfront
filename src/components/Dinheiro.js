@@ -3,7 +3,7 @@ import Opcoes from './Opcoes';
 import Values from './Values';
 import styles from './Dinheiro.module.css';
 
-function Dinheiro() {
+function Dinheiro({selectOption}) {
     const [itensDrop, setItensDrop] = useState({
         nota: null,
         moeda: null,
@@ -11,6 +11,7 @@ function Dinheiro() {
     });
 
     const [valoresNotas, setValoresNotas] = useState([]);
+    const [somaTotal, setSomaTotal] = useState(0);
 
     const drop = (e, tipo) => {
         e.preventDefault();
@@ -22,6 +23,7 @@ function Dinheiro() {
 
             if (tipo === 'entrada' && valorNota !== null) {
                 setValoresNotas((prev) => [...prev, valorNota]);
+                setSomaTotal((prev) => prev + valorNota);
             }
         } else if (id.startsWith('moeda')) {
             setItensDrop((prev) => ({ ...prev, moeda: tipo === 'entrada' ? id : null }));
@@ -44,10 +46,11 @@ function Dinheiro() {
     const somaNotas = valoresNotas.reduce((acc, valor) => acc + valor, 0);
 
     const calcularTroco = () => {
-        const valorProduto = 7;
-        const troco = somaNotas - valorProduto;
+        const valorProduto = selectOption;
+        const troco = somaTotal - valorProduto;
         if (troco >= 0) {
-            setItensDrop((prev) => ({ ...prev, troco: `R$ ${troco.toFixed(2)}` }));
+            setItensDrop((prev) => ({ ...prev, troco: {id: `troco_${Date.now()}`, valor: troco} }));
+            setSomaTotal(troco);
         } else {
             alert('saldo insuficiente');
         }
@@ -71,8 +74,8 @@ function Dinheiro() {
             >
                 <div className={styles.furoDinheiroSaida}>
                     {itensDrop.troco &&
-                        <div className={styles.troco} draggable onDragStart={(e) => e.dataTransfer.setData('text/plain', 'troco')}>
-                            {itensDrop.troco}
+                        <div className={styles.troco} draggable onDragStart={(e) => {e.dataTransfer.setData('text/plain', JSON.stringify({id: itensDrop.troco.id, valor: itensDrop.troco.valor }))}}>
+                            {`R$ ${itensDrop.troco.valor.toFixed(2)}`}
                         </div>}
                 </div>    
             </div>
@@ -84,8 +87,8 @@ function Dinheiro() {
                 <div className={styles.furoMoeda} />
                 {itensDrop.moeda && <div className="moeda">{itensDrop.moeda}</div>}
             </div>
-            <Opcoes somaTotal={somaNotas} />
-            <Values somaTotal={somaNotas} setItensDrop={setItensDrop} />
+            <Opcoes somaTotal={somaTotal} />
+            <Values somaTotal={somaTotal} setItensDrop={setItensDrop} setSomaTotal={setSomaTotal} />
         </main>
     );
 }

@@ -1,11 +1,14 @@
 import styles from './Opcoes.module.css';
 import Values from './Values';
 
-function Opcoes({somaTotal }){
+function Opcoes({somaTotal, doceSelecionado, setDoceSelecionado}){
+
+    console.log('doce é', typeof setDoceSelecionado)
+
     return(
         <main className={styles.containerOpcoes}>
             <div className={styles.visor}>
-                {somaTotal ===0 ? (
+                {somaTotal === 0 ? (
                     <div className={styles.textValues}>
                         <p>Insira um valor</p>
                     </div>
@@ -15,7 +18,7 @@ function Opcoes({somaTotal }){
                     </div>    
                 )}
             </div>
-            <Values/>
+            <Values doceSelecionado={doceSelecionado} setDoceSelecionado={setDoceSelecionado}/>
         </main>
     )
 }

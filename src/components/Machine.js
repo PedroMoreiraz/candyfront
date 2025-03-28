@@ -1,20 +1,25 @@
  import styles from './Machine.module.css';
- import {} from 'react-icons/fa';
+ import { useState } from 'react';
 import Vidro from './Vidro.js';
 import Opcoes from './Opcoes.js';
 import Dinheiro from './Dinheiro.js';
 import Carteira  from './Carteira.js';
 
 function Machine() {
+
+    const [doceSelecionado, setDoceSelecionado] = useState(null);
+
+    console.log('doce é', typeof setDoceSelecionado)
+
 return(
     <>
         <main className={styles.containerMaquina}>
             <article className={styles.fundoMaquina}>
                 <section className={styles.leftSide}>
-                    <Vidro/>
+                    <Vidro doceSelecionado={doceSelecionado}/>
                 </section>
                 <section className={styles.rightSide}>
-                    <Opcoes/>    
+                    <Opcoes doceSelecionado={doceSelecionado} setDoceSelecionado={setDoceSelecionado}/>    
                     <Dinheiro/>   
                 </section>
             </article>

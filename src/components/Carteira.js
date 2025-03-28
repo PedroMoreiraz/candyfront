@@ -16,9 +16,11 @@ function Carteira({ setItensDrop, itensDrop }) {
 
     const dropCarteira = (e) => {
         e.preventDefault();
-        const troco = e.dataTransfer.getData('text/plain');
-        if (troco === 'troco') {
-            setItensDrop((prev) => ({ ...prev, troco: 'R$ 2,00' }))
+        const trocoData = e.dataTransfer.getData('text/plain');
+
+        const {id, valor} = JSON.parse(trocoData);
+        if (id && valor !== undefined) {
+            setItensDrop((prev) => ({ ...prev, troco: {id, valor}  }))
         }
     };
 
@@ -32,9 +34,8 @@ function Carteira({ setItensDrop, itensDrop }) {
                 </div>
             )}
             <div className={styles.areaTroco} onDrop={dropCarteira} onDragOver={(e) => e.preventDefault()}>
-                <p>Arraste o troco para cá</p>
                 {itensDrop && itensDrop.troco && (
-                    <div className='troco'>{itensDrop.troco}</div>
+                    <div className='troco' draggable onDragStart={(e) => e.dataTransfer.setData('text/plain', `troco_${itensDrop.troco.id}`)}>{` R$ ${itensDrop.troco.valor.toFixed(2)}`}</div>
                 )}
             </div>
         </main>

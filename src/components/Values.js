@@ -1,8 +1,9 @@
 import { FaLock, FaLockOpen } from "react-icons/fa";
 import styles from './Values.module.css';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
-function Values({ somaTotal, setItensDrop }) {
+function Values({ somaTotal, setItensDrop , setSomaTotal, setDoceSelecionado}) {
 
     const [selectOption, setSelectOption] = useState(null);
 
@@ -14,17 +15,47 @@ function Values({ somaTotal, setItensDrop }) {
         if (selectOption !== null) {
             const troco = somaTotal - selectOption;
             if (troco >= 0) {
-                setItensDrop((prev) => ({ ...prev, troco: `R$ ${troco.toFixed(2)}` }));
+                setItensDrop((prev) => ({ ...prev, troco: {id: `troco_${Date.now()}`, valor: troco} }));
+
+                setSomaTotal(troco);
+
+                let doceSelecionado = '';
+                switch(selectOption){
+                    case 6:
+                        doceSelecionado = 'A'
+                        break;
+                    case 7:
+                        doceSelecionado = 'B'
+                        break;
+                    case 8:
+                        doceSelecionado = 'C'
+                        break;  
+                    default:
+                        doceSelecionado = '';      
+                }
+                console.log("Doce selecionado: ", doceSelecionado)
+                console.log('setDoceSelecionado é:', typeof setDoceSelecionado);
+
+                setDoceSelecionado(prevState =>{
+                    console.log('estado antes', prevState);
+                    return doceSelecionado;
+                });
+
             } else {
-                alert('não tem troco');
+                toast.error('Não tem troco',{
+                    autoClose: 3000,
+                });
             }
         } else {
-            alert('Selecione uma opção');
-        }
-    }
+            toast.error('Selecione uma opção',{
+                autoClose: 3000,
+            });
+        };
+    };
 
     return (
         <main className={styles.containerValues}>
+            <ToastContainer />
             <div className={styles.opcoes}>
                 {somaTotal >= 6 ? (
                     <div className={styles.options} onClick={() => manipularOption(6)}>
