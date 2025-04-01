@@ -38,11 +38,6 @@ function Carteira({ setItensDrop, itensDrop }) {
                     <Notasemoedas id="nota3" conteudo="R$ 1,00" iniciarArrasto={iniciarArrasto} />
                 </div>
             )}
-            <div className={styles.areaTroco} onDrop={dropCarteira} onDragOver={(e) => e.preventDefault()}>
-                {itensDrop && itensDrop.troco && (
-                    <div className='troco'>{`R$ ${itensDrop.troco.valor.toFixed(2)}`}</div>
-                )}
-            </div>
         </main>
     );
 }
