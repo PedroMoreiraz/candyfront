@@ -93,7 +93,7 @@ function Machine() {
                 });
             }
         } else {
-            toast.error('Selecione uma opção', {
+            toast.error('O valor de nenuma opção foi atingido', {
                 autoClose: 3000,
             });
         }
