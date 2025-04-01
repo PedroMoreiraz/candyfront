@@ -33,13 +33,11 @@ function Values({ somaTotal, setItensDrop , setSomaTotal, setDoceSelecionado}) {
                     default:
                         doceSelecionado = '';      
                 }
+                
                 console.log("Doce selecionado: ", doceSelecionado)
                 console.log('setDoceSelecionado é:', typeof setDoceSelecionado);
 
-                setDoceSelecionado(prevState =>{
-                    console.log('estado antes', prevState);
-                    return doceSelecionado;
-                });
+                setDoceSelecionado(doceSelecionado);
 
             } else {
                 toast.error('Não tem troco',{

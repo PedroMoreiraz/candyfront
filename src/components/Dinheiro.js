@@ -3,7 +3,7 @@ import Opcoes from './Opcoes';
 import Values from './Values';
 import styles from './Dinheiro.module.css';
 
-function Dinheiro({selectOption}) {
+function Dinheiro({ selectOption }) {
     const [itensDrop, setItensDrop] = useState({
         nota: null,
         moeda: null,
@@ -38,7 +38,7 @@ function Dinheiro({selectOption}) {
         const valores = {
             nota1: 2,
             nota2: 5,
-            moeda1: 1,
+            nota3: 1,
         };
         return valores[id] || null;
     };
@@ -49,11 +49,50 @@ function Dinheiro({selectOption}) {
         const valorProduto = selectOption;
         const troco = somaTotal - valorProduto;
         if (troco >= 0) {
-            setItensDrop((prev) => ({ ...prev, troco: {id: `troco_${Date.now()}`, valor: troco} }));
+            setItensDrop((prev) => ({ ...prev, troco: { id: `troco_${Date.now()}`, valor: troco } }));
             setSomaTotal(troco);
         } else {
-            alert('saldo insuficiente');
+            alert('Saldo insuficiente');
         }
+    };
+
+    const moverTrocoParaCarteira = () => {
+        if (itensDrop.troco) {
+            const troco = itensDrop.troco;
+            setItensDrop((prev) => ({ ...prev, troco: null }));
+
+            setSomaTotal(0);
+        }
+    };
+
+    const renderizarTroco = () => {
+        if (!itensDrop.troco) return null;
+
+        const troco = itensDrop.troco.valor;
+
+        if (troco === 0) {
+            return null;
+        }
+
+        if (troco === 1) {
+            return (
+                <div className={styles.moeda}>
+                    <div className={styles.furoMoeda} />
+                    <div 
+                        className={`${styles.moedaTroco} ${styles.trocoMoeda}`} 
+                        onClick={moverTrocoParaCarteira} 
+                    >
+                        {`R$ ${troco.toFixed(2)}`}
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className={styles.troco} onClick={moverTrocoParaCarteira}>
+                {`R$ ${troco.toFixed(2)}`}
+            </div>
+        );
     };
 
     return (
@@ -73,10 +112,7 @@ function Dinheiro({selectOption}) {
                 onDragOver={allowDrop}
             >
                 <div className={styles.furoDinheiroSaida}>
-                    {itensDrop.troco &&
-                        <div className={styles.troco} draggable onDragStart={(e) => {e.dataTransfer.setData('text/plain', JSON.stringify({id: itensDrop.troco.id, valor: itensDrop.troco.valor }))}}>
-                            {`R$ ${itensDrop.troco.valor.toFixed(2)}`}
-                        </div>}
+                    {renderizarTroco()}
                 </div>    
             </div>
             <div

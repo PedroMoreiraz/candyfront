@@ -48,6 +48,12 @@
     border: 1px solid #000;
 }
 
+.fini1{
+    position: absolute;
+    left: 10px;
+    top: -30px;
+}
+
 .shelf2{
     position: absolute;
     left: 13%;
@@ -70,6 +76,12 @@
     text-align: center;
     border: 1px solid #000;
 
+}
+
+.fini2{
+    position: absolute;
+    left: 10px;
+    top: -32px;
 }
 
 .shelf3{
@@ -96,6 +108,12 @@
 
 }
 
+.fini3{
+    position: absolute;
+    left: 180px;
+    top: -32px;
+}
+
 .vidro ul{
     position: absolute;
     right: 1%;
@@ -107,4 +125,29 @@
     justify-content: space-around;
     align-items: center;
     list-style: none;
+}
+
+.doces {
+    transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.docesAnimado {
+    transform: scale(1.2); /* Aumenta o tamanho do doce */
+    opacity: 1;
+}
+
+.docesAnimado img {
+    animation: pulse 1s ease-in-out infinite; /* Animação de pulsar */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

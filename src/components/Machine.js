@@ -1,5 +1,5 @@
- import styles from './Machine.module.css';
- import { useState } from 'react';
+import styles from './Machine.module.css';
+import { useState } from 'react';
 import Vidro from './Vidro.js';
 import Opcoes from './Opcoes.js';
 import Dinheiro from './Dinheiro.js';
@@ -8,8 +8,7 @@ import Carteira  from './Carteira.js';
 function Machine() {
 
     const [doceSelecionado, setDoceSelecionado] = useState(null);
-
-    console.log('doce é', typeof setDoceSelecionado)
+    console.log('setDoceSelecionado é:', typeof setDoceSelecionado);
 
 return(
     <>

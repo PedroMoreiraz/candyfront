@@ -64,7 +64,37 @@
 }
 
 .troco{
-    width: 1;
-    height: 3%;
-    background-color: #2cdb49;
+    position: absolute;
+    left: 18px;
+    top: 20px;
+    padding: 10px;
+    color: transparent;
+    background-image: url('./images/nota2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    user-select: none;
+    transform: rotate(90deg);
+}
+
+.trocoMoeda{
+    color: transparent;
+    position: absolute;
+    border-radius: 50%;
+    left: -102px;
+    top: -30px;
+    padding: 10px;
+    background-image: url('./images/moeda1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    text-align: center;
+    user-select: none;
 }

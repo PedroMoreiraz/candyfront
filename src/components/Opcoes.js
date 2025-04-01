@@ -1,9 +1,9 @@
 import styles from './Opcoes.module.css';
 import Values from './Values';
 
-function Opcoes({somaTotal, doceSelecionado, setDoceSelecionado}){
+function Opcoes({somaTotal, doceSelecionado, setDoceSelecionado}) {
 
-    console.log('doce é', typeof setDoceSelecionado)
+    console.log('setDoceSelecionado é:', typeof setDoceSelecionado);
 
     return(
         <main className={styles.containerOpcoes}>
