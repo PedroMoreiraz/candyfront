@@ -402,3 +402,17 @@
 .conteudoMochila{
     display: flex;
 }
+
+.reloadBtn{
+    position: absolute;
+    left: 98%;
+    top: 1%;
+    width: 30px;
+    height: 30px;
+    background-image: linear-gradient(45deg, #60abe9 0%, #19a1f0  51%, #204abd  100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid #000;
+}

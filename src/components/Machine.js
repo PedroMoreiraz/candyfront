@@ -4,10 +4,12 @@ import FiniMinhoca from './images/finiminhoca.png';
 import FiniBanana from './images/finibanana.png';
 import FiniBeijos from './images/finibeijos.png';
 import styles from './Machine.module.css';
-import { FaLock, FaLockOpen } from 'react-icons/fa';
+import { FaLock, FaLockOpen, FaHistory } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 
 function Machine() {
+
+    
     const [doceSelecionado, setDoceSelecionado] = useState(null);
     const [somaTotal, setSomaTotal] = useState(0);
     const [itensDrop, setItensDrop] = useState({
@@ -18,7 +20,7 @@ function Machine() {
     const [valoresNotas, setValoresNotas] = useState([]);
     const [selectOption, setSelectOption] = useState(null);
     const [itensMochila, setItensMochila] = useState([]);
-
+    
     const adicionarNota = (valorNota) => {
         const novoTotal = somaTotal + valorNota;
         if (novoTotal <= 10) {
@@ -30,7 +32,7 @@ function Machine() {
             });
         }
     };
-
+    
     const calcularTroco = (valorProduto) => {
         const troco = somaTotal - valorProduto;
         if (troco >= 0) {
@@ -45,11 +47,11 @@ function Machine() {
             });
         }
     };
-
+    
     const manipularOption = (valorOpcao) => {
         setSelectOption(valorOpcao);
     };
-
+    
     const confirmar = () => {
         if (selectOption !== null) {
             const troco = somaTotal - selectOption;
@@ -58,148 +60,148 @@ function Machine() {
                     ...prev,
                     troco: { id: `troco_${Date.now()}`, valor: troco },
                 }));
-    
+                
                 setSomaTotal(troco);
-    
+                
                 let doceSelecionado = '';
                 switch (selectOption) {
                     case 6:
                         doceSelecionado = 'A';
                         break;
-                    case 7:
-                        doceSelecionado = 'B';
-                        break;
-                    case 8:
-                        doceSelecionado = 'C';
-                        break;
-                    default:
-                        doceSelecionado = '';
-                }
-    
-                setDoceSelecionado(doceSelecionado);
-            
-                if (troco > 0) {
-                    toast.success(`Você comprou o Doce ${doceSelecionado} e recebeu troco de R$ ${troco.toFixed(2)}`, {
-                        autoClose: 3000,
-                    });
-                } else {
-                    toast.success(`Você comprou o Doce ${doceSelecionado} e não recebeu troco`, {
-                        autoClose: 3000,
-                    });
-                }
-            } else {
-                toast.error('Coloque mais dinheiro', {
-                    autoClose: 3000,
-                });
-            }
-        } else {
-            toast.error('O valor de nenuma opção foi atingido', {
-                autoClose: 3000,
-            });
-        }
-    };
-
-    const getClassName = (doce) => {
-        return doceSelecionado === doce
-            ? `${styles.doces} ${styles.docesAnimado}`
-            : styles.doces;
-    };
-
-    const getDoceImagem = () => {
-        switch (doceSelecionado) {
-            case 'A':
-                return FiniMinhoca;
-            case 'B':
-                return FiniBanana;
-            case 'C':
-                return FiniBeijos;
-            default:
-                return null;
-        }
-    };
-
-    const moverParaMochila = () => {
-        if (doceSelecionado) {
-            setItensMochila((prev) => [...prev, doceSelecionado]);
-            setDoceSelecionado(null);
-        }
-    };
-
-    const drop = (e, tipo) => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData('text/plain');
-        const valorNota = getValorNota(id);
-        const valorMoeda = getValorMoeda(id);
-        const novoTotal = tipo === 'entrada' ? somaTotal + (valorNota || valorMoeda) : somaTotal;
-    
-        if (novoTotal <= 10) {
-            if (id.startsWith('nota')) {
-                if (tipo === 'entrada' && valorNota !== null) {
-                    setItensDrop((prev) => ({ ...prev, nota: id }));
-                    setValoresNotas((prev) => [...prev, valorNota]);
-                    setSomaTotal(novoTotal);
-                } else if (tipo === 'saida') {
-                    setItensDrop((prev) => ({ ...prev, troco: { id: `troco_${Date.now()}`, valor: valorNota } }));
-                }
-            } else if (id.startsWith('moeda')) {
-                if (tipo === 'entrada' && valorMoeda !== null) {
-                    setItensDrop((prev) => ({ ...prev, moeda: id }));
-                    setSomaTotal(novoTotal);
-                }
-            }
-        } else {
-            toast.error('Valor máximo de R$ 10,00 atingido', {
-                autoClose: 3000,
-            });
-        }
-    };
-
-    const allowDrop = (e) => {
-        e.preventDefault();
-    };
-
-    const getValorNota = (id) => {
-        const valores = {
-            nota1: 2,
-            nota2: 5,
-            nota3: 1,
-        };
-        return valores[id] || null;
-    };
-
-    const getValorMoeda = (id) => {
-        const valores = {
-            moeda1: 0.5,
-            moeda2: 1,
-            moeda3: 0.25,
-        };
-        return valores[id] || null;
-    };
-
-    const moverTrocoParaCarteira = () => {
-        if (itensDrop.troco) {
-            setItensDrop((prev) => ({ ...prev, troco: null }));
-            setSomaTotal(0);
-        }
-    };
-
-    const renderizarTroco = () => {
-        if (!itensDrop.troco) return null;
-    
-        const troco = itensDrop.troco.valor;
-    
-        if (troco === 0) {
-            return null;
-        }
-    
-        if (troco === 1) {
-            return (
-                <div className={styles.trocoMoeda} onClick={moverTrocoParaCarteira}>
+                        case 7:
+                            doceSelecionado = 'B';
+                            break;
+                            case 8:
+                                doceSelecionado = 'C';
+                                break;
+                                default:
+                                    doceSelecionado = '';
+                                }
+                                
+                                setDoceSelecionado(doceSelecionado);
+                                
+                                if (troco > 0) {
+                                    toast.success(`Você comprou o Doce ${doceSelecionado} e recebeu troco de R$ ${troco.toFixed(2)}`, {
+                                        autoClose: 3000,
+                                    });
+                                } else {
+                                    toast.success(`Você comprou o Doce ${doceSelecionado} e não recebeu troco`, {
+                                        autoClose: 3000,
+                                    });
+                                }
+                            } else {
+                                toast.error('Coloque mais dinheiro', {
+                                    autoClose: 3000,
+                                });
+                            }
+                        } else {
+                            toast.error('O valor de nenuma opção foi atingido', {
+                                autoClose: 3000,
+                            });
+                        }
+                    };
+                    
+                    const getClassName = (doce) => {
+                        return doceSelecionado === doce
+                        ? `${styles.doces} ${styles.docesAnimado}`
+                        : styles.doces;
+                    };
+                    
+                    const getDoceImagem = () => {
+                        switch (doceSelecionado) {
+                            case 'A':
+                                return FiniMinhoca;
+                                case 'B':
+                                    return FiniBanana;
+                                    case 'C':
+                                        return FiniBeijos;
+                                        default:
+                                            return null;
+                                        }
+                                    };
+                                    
+                                    const moverParaMochila = () => {
+                                        if (doceSelecionado) {
+                                            setItensMochila((prev) => [...prev, doceSelecionado]);
+                                            setDoceSelecionado(null);
+                                        }
+                                    };
+                                    
+                                    const drop = (e, tipo) => {
+                                        e.preventDefault();
+                                        const id = e.dataTransfer.getData('text/plain');
+                                        const valorNota = getValorNota(id);
+                                        const valorMoeda = getValorMoeda(id);
+                                        const novoTotal = tipo === 'entrada' ? somaTotal + (valorNota || valorMoeda) : somaTotal;
+                                        
+                                        if (novoTotal <= 10) {
+                                            if (id.startsWith('nota')) {
+                                                if (tipo === 'entrada' && valorNota !== null) {
+                                                    setItensDrop((prev) => ({ ...prev, nota: id }));
+                                                    setValoresNotas((prev) => [...prev, valorNota]);
+                                                    setSomaTotal(novoTotal);
+                                                } else if (tipo === 'saida') {
+                                                    setItensDrop((prev) => ({ ...prev, troco: { id: `troco_${Date.now()}`, valor: valorNota } }));
+                                                }
+                                            } else if (id.startsWith('moeda')) {
+                                                if (tipo === 'entrada' && valorMoeda !== null) {
+                                                    setItensDrop((prev) => ({ ...prev, moeda: id }));
+                                                    setSomaTotal(novoTotal);
+                                                }
+                                            }
+                                        } else {
+                                            toast.error('Valor máximo de R$ 10,00 atingido', {
+                                                autoClose: 3000,
+                                            });
+                                        }
+                                    };
+                                    
+                                    const allowDrop = (e) => {
+                                        e.preventDefault();
+                                    };
+                                    
+                                    const getValorNota = (id) => {
+                                        const valores = {
+                                            nota1: 2,
+                                            nota2: 5,
+                                            nota3: 1,
+                                        };
+                                        return valores[id] || null;
+                                    };
+                                    
+                                    const getValorMoeda = (id) => {
+                                        const valores = {
+                                            moeda1: 0.5,
+                                            moeda2: 1,
+                                            moeda3: 0.25,
+                                        };
+                                        return valores[id] || null;
+                                    };
+                                    
+                                    const moverTrocoParaCarteira = () => {
+                                        if (itensDrop.troco) {
+                                            setItensDrop((prev) => ({ ...prev, troco: null }));
+                                            setSomaTotal(0);
+                                        }
+                                    };
+                                    
+                                    const renderizarTroco = () => {
+                                        if (!itensDrop.troco) return null;
+                                        
+                                        const troco = itensDrop.troco.valor;
+                                        
+                                        if (troco === 0) {
+                                            return null;
+                                        }
+                                        
+                                        if (troco === 1) {
+                                            return (
+                                                <div className={styles.trocoMoeda} onClick={moverTrocoParaCarteira}>
                     {`R$ ${troco.toFixed(2)}`}
                 </div>
             );
         }
-    
+        
         if (troco === 2) {
             return (
                 <div className={styles.troco} onClick={moverTrocoParaCarteira}>
@@ -207,7 +209,7 @@ function Machine() {
                 </div>
             );
         }
-    
+        
         if (troco === 3) {
             return (
                 <>
@@ -220,7 +222,7 @@ function Machine() {
                 </>
             );
         }
-    
+        
         if (troco === 4) {
             return (
                 <>
@@ -233,9 +235,13 @@ function Machine() {
                 </>
             );
         }
-    
+        
         return null;
     };
+    
+    function reload(){
+        window.location.reload();
+    }
 
     return (
         <main className={styles.containerMaquina}>
@@ -254,7 +260,7 @@ function Machine() {
                                             id="candyA"
                                             className={getClassName('A')}
                                             onClick={() => setDoceSelecionado('A')}
-                                        >
+                                            >
                                             <div className={styles.fini1}>
                                                 {doceSelecionado !== 'A' && !itensMochila.includes('A')&&(
                                                     <img
@@ -441,6 +447,11 @@ function Machine() {
                             ))}
                         </div>
                     </main>
+            </article>
+            <article>
+                <button className={styles.reloadBtn} onClick={reload}>
+                    <FaHistory/>
+                </button>
             </article>
         </main>
     );
