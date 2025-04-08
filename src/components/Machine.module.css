@@ -43,7 +43,7 @@
 .luz{
     max-width: 400px;
     margin: auto;
-    height: 550px;
+    height: 480px;
     clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
     padding-top: 40px;
     background: linear-gradient(rgba(253, 255, 114,1), rgba(216, 216, 216,.2));
@@ -246,8 +246,10 @@
 .btn{
     position: absolute;
     padding: 5px;
-    top: 560px;
-    left: 1099px;
+    top: 525px;
+    left: 1035px;
+    top: 500px;
+    left: 1035px;
     border-radius: 25px;
     border: none;
     box-shadow: 0px 0px 14px -7px #0571ff;
@@ -392,7 +394,7 @@
 .containerMochila{
     position: absolute;
     left: 1%;
-    top: 82%;
+    top: 78%;
     background-color: rgb(146, 146, 146);
     width: 19em;
     height: 10em;
@@ -405,8 +407,8 @@
 
 .reloadBtn{
     position: absolute;
-    left: 98%;
-    top: 1%;
+    left: 97%;
+    top: 2%;
     width: 30px;
     height: 30px;
     background-image: linear-gradient(45deg, #60abe9 0%, #19a1f0  51%, #204abd  100%);

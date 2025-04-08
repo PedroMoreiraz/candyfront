@@ -6,8 +6,8 @@
     width: 15em;
     height: 10%;
     position: absolute;
-    top: 90%;
-    left: 87%;
+    top: 88%;
+    left: 86%;
     cursor: pointer;
     overflow: hidden;
     transition: width 0.3s ease, height 0.3s ease;
@@ -24,7 +24,7 @@
     height: 14%;
     position: absolute;
     top: 86%;
-    left: 86%;
+    left: 85%;
     transition: width 0.7s ease, height 0.1s ease;;
   }
   
